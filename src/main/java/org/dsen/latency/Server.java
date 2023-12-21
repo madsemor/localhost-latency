@@ -17,7 +17,7 @@ public class Server  implements Runnable {
 
             while (run) {
                 Socket clientSocket = serverSocket.accept();
-                System.out.println("Client connected: " + clientSocket.getInetAddress());
+               // System.out.println("Client connected: " + clientSocket.getInetAddress());
 
                 // Handle client request in a separate thread
                 Thread thread = new Thread(new ServerHandler(clientSocket));
