@@ -1,5 +1,7 @@
 package org.dsen.latency;
 
+import org.dsen.latency.util.TestPerformanceUtil;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -22,12 +24,13 @@ public class ServerHandler implements Runnable {
         ) {
             // Read a message from the client
             in.readObject();
-
+            TestPerformanceUtil.stop("request");
             // Send a response back to the client
             LocalDateTime responseTime = LocalDateTime.now();
             out.writeObject(responseTime);
 
             clientSocket.close();
+            TestPerformanceUtil.start("response");
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
